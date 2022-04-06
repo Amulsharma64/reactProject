@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+  .wrapper{
+  padding: 10px;
+  border: 1px solid black;
+  width: 40%;
+  margin: auto;
+}
+.wrapper .input{
+  width: 85%;
+  height: 20px;
+}
+.wrapper .btn{
+  width: 50px;
+  height: 25px;
+}
+.wrapper ul{
+  list-style: none;
+  padding: 0px;
+}
+.wrapper li{
+  color: red;
+}
+.wrapper li a{
+  float: right;
+  color: #000;
+  text-decoration: none;
+  font-weight: bold;
+}
+.wrapper #error{
+  color: red;
+  font-size: 15px;
+}
+    </style>
+</head>
+<body>
+
+    <form class="wrapper">
+        <input type="text" id="name" class="input">
+        <input type="button" value="Add" id="btnClick" class="btn" onclick="addMore()">
+        <span id="error"></span>
+        <ul id="box"></ul>
+      </form>
+
+
+
+    <script>
+      function addMore(){
+  document.getElementById('error').innerHTML = "";
+
+  let name = document.getElementById('name').value;
+  if(name == ''){
+    document.getElementById('error').innerHTML = "Please Enter Some Value!";
+  } else{
+    let box = document.getElementById('box');
+
+    let li = document.createElement('li');
+    li.textContent = name;
+
+    let a = document.createElement('a');
+    a.textContent = 'X';
+    // a.href = "javascript:void(0)";
+    // a.className = "remove";
+    li.appendChild(a);
+
+    let position = box.firstElementChild;
+    if(position == null){
+      box.appendChild(li);
+    } else{
+      box.insertBefore(li, position);
+    }
+  }
+  document.getElementById('name').value = "";
+}
+let btn = document.querySelector('ul');
+btn.addEventListener('click', function(e){
+  let box = document.getElementById('box');
+  let li = e.target.parentNode;
+  box.removeChild(li);
+});
+      
+    </script>
+</body>
+</html>
